@@ -1,0 +1,32 @@
+.box-container{
+    height:100vh;
+    width:100%;
+    border:2px solid red;
+    display: flex;
+    justify-content: center;
+}
+.box{
+    margin:10rem;
+    height:50vh;
+    width:60%;
+    display: flex;
+}
+.left_box{
+    padding-left: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+   height:100%;
+   width:35%;
+   border:2px solid rgb(68, 62, 62);
+   background: black;
+    color: white;
+}
+a{
+    color:black;
+}
+.right_box{
+    height:100%;
+   width:65%;
+   border:2px solid rgb(68, 62, 62);
+}
