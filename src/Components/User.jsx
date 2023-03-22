@@ -1,59 +1,137 @@
-import React, { useEffect, useState } from 'react';
-import './user.css';
+
+
+import React, { useEffect, useState } from 'react'
+import './user.css'
+import { useSelector } from "react-redux";
+
+
 
 const User = () => {
-  const [genderResult, setGenderResult] = useState({ results: [] });
-  const [selectedGender, setSelectedGender] = useState("all");
-  
+    
+    const [gender, setGender] = useState("all")
+    const data = useSelector((state) => state);
+    console.log(data.usersData)
+    const [userdata, setUserdata] = useState([...data.usersDetail])
 
-  const fetchData = async () => {
-    const url = selectedGender === 'all'
-      ? "https://randomuser.me/api/?results=20"
-      : `https://randomuser.me/api/?results=20&gender=${selectedGender}`;
-    const response = await fetch(url);
-    const data = await response.json();
-    setGenderResult(data);
-    console.log(data);
-  }
+    useEffect(() => {
 
-  const handleGenderChange = (event) => {
-    const genderValue = event.target.value;
-    setSelectedGender(genderValue);
-  }
+    }, [gender])
 
-  useEffect(() => {
-    fetchData();
-  }, [selectedGender]);
+    return (
+        <div className='users'>
+            <div className="user-maincontainer">
+                <h1>Users Details</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea corrupti ducimus eum omnis cum deleniti, eaque rem, illum vitae ratione soluta nemo inventore. Rem, ullam laboriosam. Eum obcaecati enim aliquam quod saepe quidem vitae quibusdam impedit libero recusandae, placeat minus iste qui explicabo error tenetur assumenda. Vel mollitia cum soluta iusto quam dignissimos labore facere quo magnam nisi, quae, explicabo quaerat harum eaque incidunt accusamus numquam excepturi libero beatae molestiae? Deserunt numquam ducimus distinctio molestiae cumque quam in quas minima omnis, aperiam expedita temporibus, ut laborum dolore modi vitae animi quisquam nisi eligendi. Dolore, alias nihil? Magni exercitationem sunt odio.</p>
 
-  return (
-    <>
-      <div className='maincontaineruser'>
-        <div className='subcontaineruser'>
-          <h1>Users</h1>
-          <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
+                <div className="radio-btn">
+                    <div className="radio-container">
+                        <input value="all" checked={gender === "all"} type="radio" onChange={(e) => {
+                            setGender(e.target.value)
+
+                        }} />
+                        <label> ALL</label>
+                    </div>
+
+                    <div className="radio-container">
+                        <input value="male" type="radio" checked={gender === "male"} onChange={(e) => {
+                            setGender(e.target.value)
+
+
+
+                        }} />
+                        <label> Male</label>
+                    </div>
+                    <div className="radio-container">
+                        <input value="female" type="radio" checked={gender === "female"} onChange={(e) => {
+                            setGender(e.target.value)
+
+
+                        }} />
+                        <label> Female</label>
+                    </div>
+
+                </div>
+
+                <div className="userconatiner">
+                    <div className="userheader">
+                        <div className="image-con">
+                            <h4>IMAGE</h4>
+
+                        </div>
+                        <div className="name-con">
+                            <h4>NAME</h4>
+
+                        </div>
+                        <div className="email-con">
+                            <h4>EMAIL</h4>
+
+                        </div>
+                        <div className="gender-con">
+                            <h4>GENDER</h4>
+
+                        </div>
+
+                    </div>
+                    {userdata &&
+							(gender !== "all"
+								? userdata
+										.filter((ele) => ele.gender === gender)
+										.map((ele) => {
+											return (
+                                                <div className='usermaincontainer'>
+                                                <div className="userheader userdata">
+                                                <div className="image-con userdatacontent">
+                                                    <img src={ele && ele.picture.large} alt="" />
+        
+                                                </div>
+                                                <div className="name-con userdatacontent">
+                                                    <p>{ele && ele.name.first}</p>
+        
+                                                </div>
+                                                <div className="email-con userdatacontent">
+                                                    <p>{ele && ele.email}</p>
+        
+                                                </div>
+                                                <div className="gender-con userdatacontent">
+                                                    <p>{ele && ele.gender}</p>
+        
+        
+        
+                                                </div>
+                                            </div>
+                                            </div>
+											);
+										})
+								: userdata.map((ele) => {
+										return (
+                                            <div className='usermaincontainer' >
+                                            <div className="userheader userdata">
+                                            <div className="image-con userdatacontent">
+                                                <img src={ele && ele.picture.large} alt="" />
+    
+                                            </div>
+                                            <div className="name-con userdatacontent">
+                                                <p>{ele && ele.name.first}</p>
+    
+                                            </div>
+                                            <div className="email-con userdatacontent">
+                                                <p>{ele && ele.email}</p>
+    
+                                            </div>
+                                            <div className="gender-con userdatacontent">
+                                                <p>{ele && ele.gender}</p>
+    
+                                            </div>
+                                        </div>
+                                        </div>
+										);
+								  }))}
+                            
+
+                </div>
+            </div>
+
         </div>
-        <div className='inputsradi'>
-        <label><input type="radio" name='gender' value="all" onChange={handleGenderChange} checked={selectedGender === 'all'} />All</label>
-         <label><input type="radio" name='gender' value="male" onChange={handleGenderChange} checked={selectedGender === 'male'} />Male</label>
-          <label><input type="radio" name='gender' value="female" onChange={handleGenderChange} checked={selectedGender === 'female'} />Female</label>
-        </div>
-        <div className='subnavuser'>
-          <span className='imagewala'>IMAGE</span>
-          <span className='namewala'>NAME</span>
-          <span className='emailwala'>EMAIL</span>
-          <span className='genderwala'>GENDER</span>
-        </div>
-        {genderResult.results.map((ele) => (
-          <div className='cards' key={ele.login.uuid}>
-            <img src={ele.picture.large} alt="pic" ></img>
-            <h3>{ele.name.first}&nbsp;&nbsp;{ele.name.last}</h3>
-            <h4>{ele.email}</h4>
-            <h2>{ele.gender}</h2>
-          </div>
-        ))}
-      </div>
-    </>
-  )
+    )
 }
-
-export default User;
+export default User
