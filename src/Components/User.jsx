@@ -10,7 +10,7 @@ const User = () => {
     
     const [gender, setGender] = useState("all")
     const data = useSelector((state) => state);
-    console.log(data.usersData)
+    console.log("data="data.usersData)
     const [userdata, setUserdata] = useState([...data.usersDetail])
 
     useEffect(() => {
