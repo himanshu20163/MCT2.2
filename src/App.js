@@ -6,6 +6,8 @@ import Loginpage from './Components/Loginpage';
 import Navbar from './Components/Navbar';
 import Products from './Components/Products';
 import User from './Components/User';
+import Product_details from './Components/Product_details';
+
 
 export default function App() {
 
@@ -22,6 +24,8 @@ export default function App() {
         <Route path="/User" element={<User/>}/>
         <Route path="/Contact" element={<Contact/>}/>
         <Route path="/" element={<Loginpage/>}/>
+         <Route path="/Product_details" element={<Product_details/>}/>
+         
         </Routes>
       {/* <Loginpage /> */}
     </div>
