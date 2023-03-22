@@ -1,7 +1,7 @@
 MCT Project
 
 HOSTED LINK :- https://mct-2-2.vercel.app/
-TECH USED :- REACT-JS, try  to implement REDUX on login 
+TECH USED :- REACT-JS, try  to implement REDUX on user details
 
 Summary
 Implemented a React App With the Filtering Feature and Routing and state mangment
