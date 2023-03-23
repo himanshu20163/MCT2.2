@@ -1,31 +1,61 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import "./Details.css"
+import React, {useEffect,useState} from 'react'
+import { Link,useParams } from 'react-router-dom'
+import "./Detail.css"
 
-const Product_details = ({detail}) => {
+const Product_details = () => {
+
+    const {id} = useParams();
+    const {category} = useParams();
+    const[pdttitle,settitle] = useState([]);
+    console.log(id)
+
+    useEffect(()=>{
+        pdt_details()
+      },[id])
+
+      async function pdt_details(){
+        const res = await fetch(`https://fakestoreapi.com/products/category/${category}`);
+        console.log(res);
+        const data = await res.json();
+        console.log(data);
+        settitle(data)
+       }
   return (
     <div className='det '>
-        <h1 className='header11 '> {detail.category} Category</h1>
-        <Link to="/Products"><div className="cross center">↞</div></Link>
-        <img src={detail.image} alt="" height={300} />
-        <div className="right detr col">
+        <Link to="/Products"><div className="cross center">Cancel</div></Link>
+        {pdttitle.map((e)=>{
+            if(e.id == id){
+                console.log(e);
+                return (
+
+                    <div className="right detr col">
+            <div className='images'>
+                 <img src={e.image} alt="" height={300} /> 
+                 </div>
             <div className="name">
                 <h4>Product Name</h4>
-                <div>{detail.title}</div>
-            </div>
-            <div className="name">
+                <div>{e.title}</div>
+            </div> 
+            
+             <div className="name">
                 <h4>Product Price</h4>
-                <div>{detail.price} $</div>
+                <div>{e.price}</div>
             </div>
             <div className="name">
                 <h4>Description</h4>
-                <div>{detail.description}</div>
+                <div>{e.description}</div>
             </div>
             <div className="name">
                 <h4>rating</h4>
-                <div>{detail.rating.rate}</div>
-            </div>
-        </div>
+                <div>{e.rating.rate}</div>
+            </div> 
+        </div> 
+                )
+            }
+        })}
+       
+        
+        
     </div>
   )
 }
