@@ -24,7 +24,11 @@ export default function App() {
         <Route path="/User" element={<User/>}/>
         <Route path="/Contact" element={<Contact/>}/>
         <Route path="/" element={<Loginpage/>}/>
+<<<<<<< HEAD
          <Route path="/Product_details/:id/:category" element={<Product_details/>}/>
+=======
+        <Route path="/Product_details/:id/:category" element={<Product_details/>}/>
+>>>>>>> 75c8925c0e0425190e5888aaa9478f5a8f9ac550
          
         </Routes>
       {/* <Loginpage /> */}
