@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import {useEffect} from "react";
-import {Link} from "react-router-dom"
+import {Link, useParams} from "react-router-dom"
 import './products.css'
 
  const Products = (productdetail) => {
 
+  const {id} = useParams();
   const[data,setdata] = useState('');
   const[pdttitle,settitle] = useState([]);
   const[category,setcategory] = useState('electronics');
@@ -13,10 +14,12 @@ import './products.css'
     him()
     pdt_details(category)
   },[category])
+
+
   async function him() {
     const res = await fetch(`https://fakestoreapi.com/products/categories`)
     const data = await res.json();
-    console.log(data);
+    console.log(data[0].id);
     if(data == ""){
 
     }
@@ -25,6 +28,7 @@ import './products.css'
 
   async function pdt_details(ele){
       const res = await fetch(`https://fakestoreapi.com/products/category/${ele}`)
+      console.log(res);
       const data = await res.json();
       console.log(data);
       settitle(data)
@@ -43,13 +47,14 @@ import './products.css'
          <div className='right_box'>
            {data == '' ? <h5>data is loading ...</h5> : null}
            {pdttitle.map((e,i)=>{
-             return (<li key={i} onClick={()=>productdetail(e)} style={{color:"black"}} ><Link to={"/Product_details"}>{e.title}</Link></li>)
+             return (<li key={i} style={{color:"black"}} ><Link to={`/Product_details/${e.id}/${category}`}>{e.title}</Link></li>)
            })}
          </div>
       </div>
+      {console.log(pdttitle)}
     </div>
+   
   )
  }
 export default Products;
-
 
