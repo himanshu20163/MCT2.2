@@ -7,8 +7,8 @@
 }
 .box{
     margin:10rem;
-    height:50vh;
-    width:60%;
+    height:70vh;
+    width:70%;
     display: flex;
 }
 .left_box{
@@ -16,7 +16,7 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-   height:100%;
+   height:auto;
    width:35%;
    border:2px solid rgb(68, 62, 62);
    background: black;
@@ -27,6 +27,10 @@ a{
 }
 .right_box{
     height:100%;
-   width:65%;
+   width:85%;
    border:2px solid rgb(68, 62, 62);
+}
+li{
+    padding:10px;
+    list-style-type: none;
 }
