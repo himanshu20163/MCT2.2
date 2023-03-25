@@ -46,8 +46,8 @@ import './products.css'
          </div>
          <div className='right_box'>
            {data == '' ? <h5>data is loading ...</h5> : null}
-           {pdttitle.map((e,i)=>{
-             return (<li key={i} style={{color:"black"}} ><Link to={`/Product_details/${e.id}/${category}`}>{e.title}</Link></li>)
+           {pdttitle.map((e)=>{
+             return (<li style={{color:"black"}} ><Link to={`/Product_details/${e.id}/${category}`}>{e.title}</Link></li>)
            })}
          </div>
       </div>
